@@ -1,0 +1,22 @@
+name: Run Repbox
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build --build-arg STATA_LIC="${{ secrets.STATA_LIC }}" -t repboxr/gha_repbox .
+    - name: Docker Run Action
+      run: docker run --rm --name gha_repbox --env REPBOX_ENCRYPT_KEY="${{ secrets.REPBOX_ENCRYPT_KEY }}" --env LOGIN_USER="${{ secrets.LOGIN_USER }}" --env LOGIN_PASSWORD="${{ secrets.LOGIN_PASSWORD }}" -v $GITHUB_WORKSPACE/sup:/root/sup -v $GITHUB_WORKSPACE/art:/root/art -v $GITHUB_WORKSPACE/scripts/:/root/scripts/:rw -v $GITHUB_WORKSPACE/project:/root/projects/project:rw -v $GITHUB_WORKSPACE/output:/root/output:rw repboxr/gha_repbox R -e 'Sys.setenv("PATH" = paste(Sys.getenv("PATH"),"/usr/local/stata/",sep=":")); source("~/scripts/run_repbox.R")'
+    - uses: actions/upload-artifact@v4
+      with:
+        name: repbox_results
+#        path: ${{ github.workspace }}/output/results.7z
+        path: ${{ github.workspace }}/output/
