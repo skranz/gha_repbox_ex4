@@ -1,0 +1,35 @@
+output:
+  encryption: true
+  encryption_mode: 7z
+  # all, reports, repdb
+  out_what: [reports, repdb]
+  
+sup:
+  # if download: false your supplement should be a ZIP
+  # file in the sup directory of this Github Repo
+  download: true
+  
+  encryption: true
+  encryption_mode: 7z
+  
+  download_script: download_sup.R
+  download_args:
+    url: https://econ.mathematik.uni-ulm.de/repbox_temp/temp_sup.7z
+    file_type: 7z
+    timeout_sec: 3600
+
+art:
+  # if download: false your supplement should be a ZIP, PDF or HTML
+  # file in the sup directory of this Github Repo
+  download: false
+  
+  encryption: true
+  encryption_mode: 7z
+  
+  download_script: download_art.R
+  download_args:
+    url: 
+    file_type: zip
+    timeout_sec: 120
+
+  

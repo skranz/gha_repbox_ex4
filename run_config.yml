@@ -1,0 +1,36 @@
+# These options correspond to arguments to 
+# repbox_run_project
+lang: [r,stata]
+
+# If you only want to perform a subset of steps
+# in the repbox analysis, comment out the other steps
+steps:
+  - static_code
+  - art
+  - reproduction
+  - reg
+  - mr_base
+  - repbox_repdb
+  - map
+  - html
+
+# Options for the different steps
+# Unless an option is explicitly specified here
+# defaults will be used.
+#
+# See the corresponding documentations of
+#
+# repbox_art_opts, repbox_stata_opts, etc
+
+art_opts:
+
+stata_opts:
+
+r_opts:
+
+map_opts:
+
+html_opts:
+
+run_opts:
+  
